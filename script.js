@@ -134,20 +134,61 @@ btnScrollTo.addEventListener('click', (event) => {
     // // window.scrollTo(section1CoOrds.left + window.pageXOffset, section1CoOrds.top + window.pageYOffset);
     //
     // window.scrollTo({
-    //     left: section1CoOrds.left + window.pageXOffset, 
+    //     left: section1CoOrds.left + window.pageXOffset,
     //     top: section1CoOrds.top + window.pageYOffset,
     //     behavior: "smooth",
     // })
 
     section1.scrollIntoView({behavior: "smooth"})
-})
+});
+
+const h1 = document.querySelector('h1');
+
+const alertEventH1 = (event) => {
+    alert('Add Event Lister: Great! You are reading the heading: H1');
+
+    // Use the statement below to use event only for once
+    // h1.removeEventListener("mouseenter", alertEventH1);
+}
+
+h1.addEventListener('mouseenter', alertEventH1);
+
+// The another way to use event only for once
+// setTimeout(() => h1.removeEventListener("mouseenter", alertEventH1), 3000);
+
+// h1.onmouseenter = (event)=>{
+//     alert('Add Event Lister: Great! You are reading the heading: H1')
+//
+// }
 
 
+/**
+ * Event Propagation
+ */
+
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () => `rgb(${randomInt(0, 255)},${randomInt(0, 255)}, ${randomInt(0, 255)})`
+console.log(randomColor())
 
 
+document.querySelector('.nav__link').addEventListener('click', function (event){
+    this.style.backgroundColor = randomColor();
 
+    console.log("Nav Link", event.target, event.currentTarget);
+});
+document.querySelector('.nav__links').addEventListener('click',function (event){
+    // console.log('LINK')
+    this.style.backgroundColor = randomColor();
+    console.log("Nav Links", event.target, event.currentTarget);
 
+});
+document.querySelector('.nav').addEventListener('click', function (event){
+//     console.log('LINK')
+    this.style.backgroundColor = randomColor();
+    console.log("NAV", event.target, event.currentTarget)
 
+});
 
 
 
