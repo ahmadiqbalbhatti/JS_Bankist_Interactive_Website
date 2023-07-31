@@ -209,7 +209,7 @@ const hoverHandler = (event)=>{
         logo.style.opacity = this;
     }
 }
-// // Vesion 1
+// // Version 1
 // nav.addEventListener('mouseover', function (event) {
 //     hoverHandler(event, 0.5);
 // });
@@ -219,9 +219,9 @@ const hoverHandler = (event)=>{
 // })
 
 /**
- * 
+ *
  * Version 2
- * 
+ *
  * Passing "argument" into handler.
  * Remember on thing, Real handler does not have arguments.
  */
