@@ -5,11 +5,15 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const header = document.querySelector('.header');
-const allSections = document.querySelectorAll('.section');
-const allButtons = document.getElementsByTagName('button');
+// const allSections = document.querySelectorAll('.section');
+// const allButtons = document.getElementsByTagName('button');
 const message = document.createElement('div');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const nav = document.querySelector('nav');
+const tabs = document.querySelectorAll(".operations__tab");
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
 
 ///////////////////////////////////////
 // Modal window
@@ -149,9 +153,6 @@ document.querySelector('.nav__links').addEventListener('click', function (event)
  * Tabbed Components
  */
 ///////////////////////////////////////////
-const tabs = document.querySelectorAll(".operations__tab");
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
 
 // One way of Adding event on Tabs
 // tabs.forEach(tab => {
@@ -187,7 +188,48 @@ tabsContainer.addEventListener('click', function (event) {
     document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 
 
-})
+});
+
+///////////////////////////////////////////
+/**
+ * Menu FADE animation
+ */
+///////////////////////////////////////////
+
+const hoverHandler = (event)=>{
+    if (event.target.classList.contains('nav__link')) {
+        const link = event.target;
+        const siblings = link.closest('.nav').querySelectorAll('.nav__link'); // Use querySelectorAll to get all links
+        const logo = link.closest('.nav').querySelector('img');
+        // console.log(siblings);
+        // Now, I can traverse through the `siblings` NodeList and apply something on each link, for example:
+        siblings.forEach((sibling) => {
+            if (sibling !== link) sibling.style.opacity = this;
+        });
+        logo.style.opacity = this;
+    }
+}
+// // Vesion 1
+// nav.addEventListener('mouseover', function (event) {
+//     hoverHandler(event, 0.5);
+// });
+//
+// nav.addEventListener('mouseout', function (event) {
+//     hoverHandler(event, 1);
+// })
+
+/**
+ * 
+ * Version 2
+ * 
+ * Passing "argument" into handler.
+ * Remember on thing, Real handler does not have arguments.
+ */
+nav.addEventListener('mouseover', hoverHandler.bind(0.5));
+nav.addEventListener('mouseout', hoverHandler.bind(1))
+
+
+
 
 
 ///////////////////////////////////////////
