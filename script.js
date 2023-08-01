@@ -196,7 +196,7 @@ tabsContainer.addEventListener('click', function (event) {
  */
 ///////////////////////////////////////////
 
-const hoverHandler = (event)=>{
+const hoverHandler = (event) => {
     if (event.target.classList.contains('nav__link')) {
         const link = event.target;
         const siblings = link.closest('.nav').querySelectorAll('.nav__link'); // Use querySelectorAll to get all links
@@ -229,7 +229,69 @@ nav.addEventListener('mouseover', hoverHandler.bind(0.5));
 nav.addEventListener('mouseout', hoverHandler.bind(1))
 
 
+// ///////////////////////////////////////////////////
+// /**
+//  * METHOD 1
+//  *  Sticky Navigation Implementation
+//  */
+// ///////////////////////////////////////////////////
+// const initialCoords = section1.getBoundingClientRect();
+// // console.log(initialCoords.top)
+// window.addEventListener("scroll", function (){
+//
+//     console.log(window.scrollY)
+//
+//     if (window.scrollY > initialCoords.top){
+//         nav.classList.add('sticky');
+//     } else {
+//         nav.classList.remove('sticky');
+//     }
+// })
 
+
+///////////////////////////////////////////////////
+/**
+ * METHOD 2
+ * Sticky Navigation Implementation
+ * By Intersection Observer API
+ */
+///////////////////////////////////////////////////
+/**
+ * Call back function is called when viewport rectangle reaches to the threshold percentage.
+ */
+// const obsCallBack = function (entries, observer) {
+//     entries.forEach(entry => {
+//         console.log(entry)
+//     })
+//
+// };
+// const observerOption = {
+//     root : null,
+//     threshold: [0, 0.2],
+// };
+//
+// const observer = new IntersectionObserver(obsCallBack, observerOption );
+// observer.observe(section1);
+
+const navHeight = nav.getBoundingClientRect().height;
+console.log(navHeight)
+const stickyNav = function (entries) {
+    const [entry] = entries;
+    console.log(entry)
+    if (!entry.isIntersecting)
+        nav.classList.add('sticky');
+    else
+        nav.classList.remove('sticky');
+}
+
+const headerObserver = new IntersectionObserver(
+    stickyNav, {
+        root: null,
+        threshold: 0,
+        rootMargin: `-${navHeight}px`,
+    }
+);
+headerObserver.observe(header);
 
 
 ///////////////////////////////////////////
