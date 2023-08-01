@@ -219,9 +219,7 @@ const hoverHandler = (event) => {
 // })
 
 /**
- *
- * Version 2
- *
+ * Version 
  * Passing "argument" into handler.
  * Remember on thing, Real handler does not have arguments.
  */
@@ -324,6 +322,41 @@ allSections.forEach((section) => {
     sectionObserver.observe(section);
     section.classList.add('section--hidden');
 })
+
+
+///////////////////////////////////////////////////
+/**
+ * Image Optimization using Data Attributes to load images Lazy-loading
+ */
+///////////////////////////////////////////////////
+const imageTarget  = document.querySelectorAll('img[data-src]');
+
+const loadImageCallback = function (entries, observer){
+    const [entry] = entries;
+    console.log(entry  );
+
+    if (!entry.isIntersecting) return;
+    // Replace src with data src
+    entry.target.src = entry.target.dataset.src;
+
+    
+    entry.target.addEventListener('load', function(){
+        entry.target.classList.remove('lazy-img');
+    })
+    
+    observer.unobserve(entry.target)
+}
+
+const imageObserver = new IntersectionObserver(loadImageCallback, {
+    root: null,
+    threshold: 0,
+    rootMargin: "200px",
+});
+
+imageTarget.forEach(img => imageObserver.observe(img));
+
+
+
 
 
 ///////////////////////////////////////////
