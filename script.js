@@ -618,3 +618,7 @@ slider();
 // console.log(h1.nextSibling);
 //
 // console.log(h1.parentElement.children)
+
+// document.addEventListener("DOMContentLoaded", function (event){
+//     console.log('HTML parsed ANd DOM tree built'    )
+// })
